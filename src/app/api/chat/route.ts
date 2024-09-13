@@ -18,7 +18,7 @@ Your goal is to inspire and guide users in creating delicious vegan meals, answe
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { conversationId, messages } = await req.json();
 
     const chatCompletion = await openai.chat.completions.create({
       model: "gpt-4",
@@ -28,7 +28,10 @@ export async function POST(req: Request) {
       ],
     });
 
-    return NextResponse.json({ response: chatCompletion.choices[0].message.content });
+    return NextResponse.json({ 
+      response: chatCompletion.choices[0].message.content,
+      conversationId: conversationId
+    });
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json({ error: 'An error occurred while processing your request.' }, { status: 500 });
