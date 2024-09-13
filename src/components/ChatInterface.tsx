@@ -70,7 +70,7 @@ const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[500px] w-full max-w-md mx-auto border border-gray-300 rounded-lg overflow-hidden">
+    <div className="flex flex-col h-screen w-full">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
           <div
@@ -82,7 +82,7 @@ const ChatInterface: React.FC = () => {
             <span
               className={`inline-block p-2 rounded-lg ${
                 message.sender === 'user'
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-green-500 text-white'
                   : 'bg-gray-200 text-gray-800'
               }`}
             >
@@ -96,7 +96,7 @@ const ChatInterface: React.FC = () => {
           type="text"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          placeholder="Type a message..."
+          placeholder="Ask about vegan recipes..."
           className="flex-1 mr-2"
         />
         <Button onClick={handleSendMessage}>Send</Button>
