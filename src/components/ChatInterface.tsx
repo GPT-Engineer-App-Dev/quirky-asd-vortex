@@ -25,7 +25,7 @@ const ChatInterface: React.FC = () => {
     localStorage.setItem('chatMessages', JSON.stringify(messages));
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim() !== '') {
       const newMessage: Message = {
         id: Date.now(),
@@ -35,15 +35,37 @@ const ChatInterface: React.FC = () => {
       setMessages([...messages, newMessage]);
       setInputMessage('');
       
-      // Simulate bot response
-      setTimeout(() => {
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messages: [{ role: 'user', content: inputMessage }],
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to get response from API');
+        }
+
+        const data = await response.json();
         const botResponse: Message = {
           id: Date.now(),
-          text: 'This is a simulated bot response.',
+          text: data.response,
           sender: 'bot',
         };
         setMessages(prevMessages => [...prevMessages, botResponse]);
-      }, 1000);
+      } catch (error) {
+        console.error('Error:', error);
+        const errorMessage: Message = {
+          id: Date.now(),
+          text: 'Sorry, there was an error processing your request.',
+          sender: 'bot',
+        };
+        setMessages(prevMessages => [...prevMessages, errorMessage]);
+      }
     }
   };
 
