@@ -119,6 +119,14 @@ const ChatInterface: React.FC = () => {
     setActiveConversation(newConversation.id);
   };
 
+  const handleRenameConversation = (id: string, newName: string) => {
+    setConversations(prevConversations =>
+      prevConversations.map(conv =>
+        conv.id === id ? { ...conv, name: newName } : conv
+      )
+    );
+  };
+
   const activeMessages = conversations.find(conv => conv.id === activeConversation)?.messages || [];
 
   return (
@@ -128,6 +136,7 @@ const ChatInterface: React.FC = () => {
         activeConversation={activeConversation || ''}
         onSelectConversation={setActiveConversation}
         onNewConversation={handleNewConversation}
+        onRenameConversation={handleRenameConversation}
       />
       <div className="flex flex-col flex-grow max-w-3xl mx-auto">
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
