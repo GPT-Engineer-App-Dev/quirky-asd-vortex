@@ -7,7 +7,6 @@ import { Send } from 'lucide-react';
 import ConversationList from './ConversationList';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from 'next-themes';
-import ResizableSidebar from './ResizableSidebar';
 
 interface Message {
   id: number;
@@ -136,15 +135,13 @@ const ChatInterface: React.FC = () => {
   return (
     <div className={`flex h-screen ${theme === 'hacker' ? 'bg-background-hacker text-foreground-hacker' : 'bg-background text-foreground'}`}>
       <ThemeToggle />
-      <ResizableSidebar>
-        <ConversationList
-          conversations={conversations}
-          activeConversation={activeConversation || ''}
-          onSelectConversation={setActiveConversation}
-          onNewConversation={handleNewConversation}
-          onRenameConversation={handleRenameConversation}
-        />
-      </ResizableSidebar>
+      <ConversationList
+        conversations={conversations}
+        activeConversation={activeConversation || ''}
+        onSelectConversation={setActiveConversation}
+        onNewConversation={handleNewConversation}
+        onRenameConversation={handleRenameConversation}
+      />
       <div className={`flex flex-col flex-grow max-w-3xl mx-auto ${theme === 'hacker' ? 'bg-card-hacker border-4 border-border-hacker shadow-hacker' : 'bg-card border-4 border-black shadow-neubrutalism'}`}>
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {activeMessages.map((message) => (
@@ -155,7 +152,7 @@ const ChatInterface: React.FC = () => {
               }`}
             >
               <div
-                className={`max-w-[70%] p-3 text-lg ${
+                className={`max-w-[70%] p-3 ${
                   theme === 'hacker'
                     ? 'border-2 border-border-hacker shadow-hacker'
                     : 'border-2 border-black shadow-neubrutalism'
@@ -182,7 +179,7 @@ const ChatInterface: React.FC = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask Chef Veganista about vegan recipes..."
-              className={`flex-1 text-lg ${
+              className={`flex-1 ${
                 theme === 'hacker'
                   ? 'border-2 border-border-hacker focus:ring-2 focus:ring-accent-hacker'
                   : 'border-2 border-black focus:ring-2 focus:ring-accent'
@@ -190,13 +187,13 @@ const ChatInterface: React.FC = () => {
             />
             <Button
               onClick={handleSendMessage}
-              className={`text-lg ${
+              className={`${
                 theme === 'hacker'
                   ? 'bg-accent-hacker text-accent-hacker-foreground border-2 border-border-hacker shadow-hacker'
                   : 'bg-accent text-accent-foreground border-2 border-black shadow-neubrutalism'
               }`}
             >
-              <Send className="w-6 h-6" />
+              <Send className="w-4 h-4" />
             </Button>
           </div>
         </div>
