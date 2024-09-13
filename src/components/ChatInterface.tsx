@@ -29,6 +29,15 @@ const ChatInterface: React.FC = () => {
     const storedConversations = localStorage.getItem('conversations');
     if (storedConversations) {
       setConversations(JSON.parse(storedConversations));
+    } else {
+      // Create a default conversation if none exist
+      const defaultConversation: Conversation = {
+        id: Date.now().toString(),
+        name: 'New Conversation',
+        messages: [],
+      };
+      setConversations([defaultConversation]);
+      setActiveConversation(defaultConversation.id);
     }
   }, []);
 
