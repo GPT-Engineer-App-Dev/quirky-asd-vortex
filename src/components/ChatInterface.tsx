@@ -43,7 +43,10 @@ const ChatInterface: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            messages: [{ role: 'user', content: inputMessage }],
+            messages: messages.concat(newMessage).map(msg => ({
+              role: msg.sender === 'user' ? 'user' : 'assistant',
+              content: msg.text
+            })),
           }),
         });
 
@@ -70,6 +73,13 @@ const ChatInterface: React.FC = () => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -81,7 +91,7 @@ const ChatInterface: React.FC = () => {
             }`}
           >
             <div
-              className={`max-w-[70%] p-3 rounded-lg ${
+              className={`max-w-[70%] p-3 rounded-lg whitespace-pre-wrap ${
                 message.sender === 'user'
                   ? 'bg-blue-500 text-white'
                   : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200'
@@ -98,13 +108,9 @@ const ChatInterface: React.FC = () => {
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
             placeholder="Ask Chef Veganista about vegan recipes..."
             className="flex-1"
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSendMessage();
-              }
-            }}
           />
           <Button onClick={handleSendMessage} className="bg-blue-500 hover:bg-blue-600 text-white">
             <Send className="w-4 h-4" />
