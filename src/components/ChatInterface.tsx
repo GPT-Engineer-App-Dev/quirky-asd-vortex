@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Send } from 'lucide-react';
 
 interface Message {
   id: number;
@@ -70,36 +71,45 @@ const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`${
-              message.sender === 'user' ? 'text-right' : 'text-left'
+            className={`flex ${
+              message.sender === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
-            <span
-              className={`inline-block p-2 rounded-lg ${
+            <div
+              className={`max-w-[70%] p-3 rounded-lg ${
                 message.sender === 'user'
-                  ? 'bg-green-500 text-white'
-                  : 'bg-gray-200 text-gray-800'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200'
               }`}
             >
               {message.text}
-            </span>
+            </div>
           </div>
         ))}
       </div>
-      <div className="p-4 border-t border-gray-300 flex">
-        <Input
-          type="text"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          placeholder="Ask about vegan recipes..."
-          className="flex-1 mr-2"
-        />
-        <Button onClick={handleSendMessage}>Send</Button>
+      <div className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex space-x-2">
+          <Input
+            type="text"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            placeholder="Ask Chef Veganista about vegan recipes..."
+            className="flex-1"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSendMessage();
+              }
+            }}
+          />
+          <Button onClick={handleSendMessage} className="bg-blue-500 hover:bg-blue-600 text-white">
+            <Send className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
     </div>
   );
