@@ -25,14 +25,20 @@ const MessageList: React.FC<MessageListProps> = ({ messages, theme }) => {
             className={`max-w-[70%] p-3 text-lg ${
               theme === 'hacker'
                 ? 'border-2 border-border-hacker shadow-hacker'
+                : theme === '90s'
+                ? 'border-2 border-border-90s shadow-90s'
                 : 'border-2 border-black shadow-neubrutalism'
             } ${
               message.sender === 'user'
                 ? theme === 'hacker'
                   ? 'bg-primary-hacker text-primary-hacker-foreground'
+                  : theme === '90s'
+                  ? 'bg-primary-90s text-primary-90s-foreground'
                   : 'bg-primary text-primary-foreground'
                 : theme === 'hacker'
                 ? 'bg-secondary-hacker text-secondary-hacker-foreground'
+                : theme === '90s'
+                ? 'bg-secondary-90s text-secondary-90s-foreground'
                 : 'bg-secondary text-secondary-foreground'
             }`}
           >

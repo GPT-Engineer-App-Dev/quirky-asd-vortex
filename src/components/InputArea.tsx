@@ -19,7 +19,13 @@ const InputArea: React.FC<InputAreaProps> = ({ inputMessage, setInputMessage, ha
   };
 
   return (
-    <div className={`p-4 ${theme === 'hacker' ? 'bg-muted-hacker border-t-4 border-border-hacker' : 'bg-muted border-t-4 border-black'}`}>
+    <div className={`p-4 ${
+      theme === 'hacker'
+        ? 'bg-muted-hacker border-t-4 border-border-hacker'
+        : theme === '90s'
+        ? 'bg-muted-90s border-t-4 border-border-90s'
+        : 'bg-muted border-t-4 border-black'
+    }`}>
       <div className="flex space-x-2">
         <Input
           type="text"
@@ -30,6 +36,8 @@ const InputArea: React.FC<InputAreaProps> = ({ inputMessage, setInputMessage, ha
           className={`flex-1 text-lg ${
             theme === 'hacker'
               ? 'border-2 border-border-hacker focus:ring-2 focus:ring-accent-hacker'
+              : theme === '90s'
+              ? 'border-2 border-border-90s focus:ring-2 focus:ring-accent-90s'
               : 'border-2 border-black focus:ring-2 focus:ring-accent'
           }`}
         />
@@ -38,6 +46,8 @@ const InputArea: React.FC<InputAreaProps> = ({ inputMessage, setInputMessage, ha
           className={`text-lg ${
             theme === 'hacker'
               ? 'bg-accent-hacker text-accent-hacker-foreground border-2 border-border-hacker shadow-hacker'
+              : theme === '90s'
+              ? 'bg-accent-90s text-accent-90s-foreground border-2 border-border-90s shadow-90s'
               : 'bg-accent text-accent-foreground border-2 border-black shadow-neubrutalism'
           }`}
         >

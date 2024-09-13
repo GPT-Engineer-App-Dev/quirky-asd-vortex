@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Send } from 'lucide-react';
 import ConversationList from './ConversationList';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from 'next-themes';
@@ -128,7 +125,13 @@ const ChatInterface: React.FC = () => {
   const activeMessages = conversations.find(conv => conv.id === activeConversation)?.messages || [];
 
   return (
-    <div className={`flex h-screen text-lg ${theme === 'hacker' ? 'bg-background-hacker text-foreground-hacker' : 'bg-background text-foreground'}`}>
+    <div className={`flex h-screen text-lg ${
+      theme === 'hacker'
+        ? 'bg-background-hacker text-foreground-hacker'
+        : theme === '90s'
+        ? 'bg-background-90s text-foreground-90s font-90s'
+        : 'bg-background text-foreground'
+    }`}>
       <ThemeToggle />
       <ConversationList
         conversations={conversations}
@@ -137,7 +140,13 @@ const ChatInterface: React.FC = () => {
         onNewConversation={handleNewConversation}
         onRenameConversation={handleRenameConversation}
       />
-      <div className={`flex flex-col flex-grow max-w-3xl mx-auto ${theme === 'hacker' ? 'bg-card-hacker border-4 border-border-hacker shadow-hacker' : 'bg-card border-4 border-black shadow-neubrutalism'}`}>
+      <div className={`flex flex-col flex-grow max-w-3xl mx-auto ${
+        theme === 'hacker'
+          ? 'bg-card-hacker border-4 border-border-hacker shadow-hacker'
+          : theme === '90s'
+          ? 'bg-card-90s border-4 border-border-90s shadow-90s'
+          : 'bg-card border-4 border-black shadow-neubrutalism'
+      }`}>
         <MessageList messages={activeMessages} theme={theme} />
         <InputArea
           inputMessage={inputMessage}
