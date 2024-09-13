@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const { conversationId, messages } = await req.json();
 
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",  // This is the model ID for GPT-4 Turbo
+      model: "gpt-4o-mini",  // Updated to use gpt-4o-mini model
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         ...messages
