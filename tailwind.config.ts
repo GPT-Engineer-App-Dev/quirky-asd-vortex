@@ -10,39 +10,68 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#FFFFFF', // White
-        foreground: '#000000', // Black
+        background: {
+          DEFAULT: '#FFFFFF',
+          hacker: '#000000',
+        },
+        foreground: {
+          DEFAULT: '#000000',
+          hacker: '#00FF00',
+        },
         card: {
-          DEFAULT: '#FFFFFF', // White
-          foreground: '#000000', // Black
+          DEFAULT: '#FFFFFF',
+          foreground: '#000000',
+          hacker: '#0A0A0A',
+          'hacker-foreground': '#00FF00',
         },
         popover: {
-          DEFAULT: '#FFFFFF', // White
-          foreground: '#000000', // Black
+          DEFAULT: '#FFFFFF',
+          foreground: '#000000',
+          hacker: '#0A0A0A',
+          'hacker-foreground': '#00FF00',
         },
         primary: {
-          DEFAULT: '#FF0000', // Red
-          foreground: '#FFFFFF', // White
+          DEFAULT: '#FF0000',
+          foreground: '#FFFFFF',
+          hacker: '#00FF00',
+          'hacker-foreground': '#000000',
         },
         secondary: {
-          DEFAULT: '#0000FF', // Blue
-          foreground: '#FFFFFF', // White
+          DEFAULT: '#0000FF',
+          foreground: '#FFFFFF',
+          hacker: '#008000',
+          'hacker-foreground': '#000000',
         },
         muted: {
-          DEFAULT: '#CCCCCC', // Light Gray
-          foreground: '#000000', // Black
+          DEFAULT: '#CCCCCC',
+          foreground: '#000000',
+          hacker: '#1A1A1A',
+          'hacker-foreground': '#00CC00',
         },
         accent: {
-          DEFAULT: '#FFFF00', // Yellow
-          foreground: '#000000', // Black
+          DEFAULT: '#FFFF00',
+          foreground: '#000000',
+          hacker: '#00FFFF',
+          'hacker-foreground': '#000000',
         },
         destructive: {
-          DEFAULT: '#FF00FF', // Magenta
-          foreground: '#FFFFFF', // White
+          DEFAULT: '#FF00FF',
+          foreground: '#FFFFFF',
+          hacker: '#FF0000',
+          'hacker-foreground': '#000000',
         },
-        border: '#000000', // Black
-        input: '#FFFFFF', // White
-        ring: '#000000', // Black
+        border: {
+          DEFAULT: '#000000',
+          hacker: '#00FF00',
+        },
+        input: {
+          DEFAULT: '#FFFFFF',
+          hacker: '#0A0A0A',
+        },
+        ring: {
+          DEFAULT: '#000000',
+          hacker: '#00FF00',
+        },
       },
       borderRadius: {
         lg: '0',
@@ -51,6 +80,7 @@ const config: Config = {
       },
       boxShadow: {
         'neubrutalism': '5px 5px 0 0 #000000',
+        'hacker': '0 0 10px #00FF00',
       },
     },
   },

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Send } from 'lucide-react';
 import ConversationList from './ConversationList';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from 'next-themes';
 
 interface Message {
   id: number;
@@ -22,6 +24,7 @@ const ChatInterface: React.FC = () => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeConversation, setActiveConversation] = useState<string | null>(null);
   const [inputMessage, setInputMessage] = useState('');
+  const { theme } = useTheme();
 
   useEffect(() => {
     const storedConversations = localStorage.getItem('conversations');
@@ -130,7 +133,8 @@ const ChatInterface: React.FC = () => {
   const activeMessages = conversations.find(conv => conv.id === activeConversation)?.messages || [];
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className={`flex h-screen ${theme === 'hacker' ? 'bg-background-hacker text-foreground-hacker' : 'bg-background text-foreground'}`}>
+      <ThemeToggle />
       <ConversationList
         conversations={conversations}
         activeConversation={activeConversation || ''}
@@ -138,7 +142,7 @@ const ChatInterface: React.FC = () => {
         onNewConversation={handleNewConversation}
         onRenameConversation={handleRenameConversation}
       />
-      <div className="flex flex-col flex-grow max-w-3xl mx-auto bg-card border-4 border-black shadow-neubrutalism">
+      <div className={`flex flex-col flex-grow max-w-3xl mx-auto ${theme === 'hacker' ? 'bg-card-hacker border-4 border-border-hacker shadow-hacker' : 'bg-card border-4 border-black shadow-neubrutalism'}`}>
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {activeMessages.map((message) => (
             <div
@@ -148,9 +152,17 @@ const ChatInterface: React.FC = () => {
               }`}
             >
               <div
-                className={`max-w-[70%] p-3 border-2 border-black shadow-neubrutalism ${
+                className={`max-w-[70%] p-3 ${
+                  theme === 'hacker'
+                    ? 'border-2 border-border-hacker shadow-hacker'
+                    : 'border-2 border-black shadow-neubrutalism'
+                } ${
                   message.sender === 'user'
-                    ? 'bg-primary text-primary-foreground'
+                    ? theme === 'hacker'
+                      ? 'bg-primary-hacker text-primary-hacker-foreground'
+                      : 'bg-primary text-primary-foreground'
+                    : theme === 'hacker'
+                    ? 'bg-secondary-hacker text-secondary-hacker-foreground'
                     : 'bg-secondary text-secondary-foreground'
                 }`}
               >
@@ -159,7 +171,7 @@ const ChatInterface: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="p-4 bg-muted border-t-4 border-black">
+        <div className={`p-4 ${theme === 'hacker' ? 'bg-muted-hacker border-t-4 border-border-hacker' : 'bg-muted border-t-4 border-black'}`}>
           <div className="flex space-x-2">
             <Input
               type="text"
@@ -167,9 +179,20 @@ const ChatInterface: React.FC = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask Chef Veganista about vegan recipes..."
-              className="flex-1 border-2 border-black focus:ring-2 focus:ring-accent"
+              className={`flex-1 ${
+                theme === 'hacker'
+                  ? 'border-2 border-border-hacker focus:ring-2 focus:ring-accent-hacker'
+                  : 'border-2 border-black focus:ring-2 focus:ring-accent'
+              }`}
             />
-            <Button onClick={handleSendMessage} className="bg-accent text-accent-foreground border-2 border-black shadow-neubrutalism">
+            <Button
+              onClick={handleSendMessage}
+              className={`${
+                theme === 'hacker'
+                  ? 'bg-accent-hacker text-accent-hacker-foreground border-2 border-border-hacker shadow-hacker'
+                  : 'bg-accent text-accent-foreground border-2 border-black shadow-neubrutalism'
+              }`}
+            >
               <Send className="w-4 h-4" />
             </Button>
           </div>
