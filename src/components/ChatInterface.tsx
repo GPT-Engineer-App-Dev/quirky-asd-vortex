@@ -7,6 +7,8 @@ import { Send } from 'lucide-react';
 import ConversationList from './ConversationList';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from 'next-themes';
+import MessageList from './MessageList';
+import InputArea from './InputArea';
 
 interface Message {
   id: number;
@@ -105,13 +107,6 @@ const ChatInterface: React.FC = () => {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
   const handleNewConversation = () => {
     const newConversation: Conversation = {
       id: Date.now().toString(),
@@ -133,7 +128,7 @@ const ChatInterface: React.FC = () => {
   const activeMessages = conversations.find(conv => conv.id === activeConversation)?.messages || [];
 
   return (
-    <div className={`flex h-screen ${theme === 'hacker' ? 'bg-background-hacker text-foreground-hacker' : 'bg-background text-foreground'}`}>
+    <div className={`flex h-screen text-lg ${theme === 'hacker' ? 'bg-background-hacker text-foreground-hacker' : 'bg-background text-foreground'}`}>
       <ThemeToggle />
       <ConversationList
         conversations={conversations}
@@ -143,60 +138,13 @@ const ChatInterface: React.FC = () => {
         onRenameConversation={handleRenameConversation}
       />
       <div className={`flex flex-col flex-grow max-w-3xl mx-auto ${theme === 'hacker' ? 'bg-card-hacker border-4 border-border-hacker shadow-hacker' : 'bg-card border-4 border-black shadow-neubrutalism'}`}>
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {activeMessages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${
-                message.sender === 'user' ? 'justify-end' : 'justify-start'
-              }`}
-            >
-              <div
-                className={`max-w-[70%] p-3 ${
-                  theme === 'hacker'
-                    ? 'border-2 border-border-hacker shadow-hacker'
-                    : 'border-2 border-black shadow-neubrutalism'
-                } ${
-                  message.sender === 'user'
-                    ? theme === 'hacker'
-                      ? 'bg-primary-hacker text-primary-hacker-foreground'
-                      : 'bg-primary text-primary-foreground'
-                    : theme === 'hacker'
-                    ? 'bg-secondary-hacker text-secondary-hacker-foreground'
-                    : 'bg-secondary text-secondary-foreground'
-                }`}
-              >
-                {message.text}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={`p-4 ${theme === 'hacker' ? 'bg-muted-hacker border-t-4 border-border-hacker' : 'bg-muted border-t-4 border-black'}`}>
-          <div className="flex space-x-2">
-            <Input
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Ask Chef Veganista about vegan recipes..."
-              className={`flex-1 ${
-                theme === 'hacker'
-                  ? 'border-2 border-border-hacker focus:ring-2 focus:ring-accent-hacker'
-                  : 'border-2 border-black focus:ring-2 focus:ring-accent'
-              }`}
-            />
-            <Button
-              onClick={handleSendMessage}
-              className={`${
-                theme === 'hacker'
-                  ? 'bg-accent-hacker text-accent-hacker-foreground border-2 border-border-hacker shadow-hacker'
-                  : 'bg-accent text-accent-foreground border-2 border-black shadow-neubrutalism'
-              }`}
-            >
-              <Send className="w-4 h-4" />
-            </Button>
-          </div>
-        </div>
+        <MessageList messages={activeMessages} theme={theme} />
+        <InputArea
+          inputMessage={inputMessage}
+          setInputMessage={setInputMessage}
+          handleSendMessage={handleSendMessage}
+          theme={theme}
+        />
       </div>
     </div>
   );
