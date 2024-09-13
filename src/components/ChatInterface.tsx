@@ -130,7 +130,7 @@ const ChatInterface: React.FC = () => {
   const activeMessages = conversations.find(conv => conv.id === activeConversation)?.messages || [];
 
   return (
-    <div className="flex h-screen bg-background bg-retro-pattern">
+    <div className="flex h-screen bg-background">
       <ConversationList
         conversations={conversations}
         activeConversation={activeConversation || ''}
@@ -138,7 +138,7 @@ const ChatInterface: React.FC = () => {
         onNewConversation={handleNewConversation}
         onRenameConversation={handleRenameConversation}
       />
-      <div className="flex flex-col flex-grow max-w-3xl mx-auto bg-card bg-opacity-90 border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+      <div className="flex flex-col flex-grow max-w-3xl mx-auto bg-card border-4 border-black shadow-neubrutalism">
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {activeMessages.map((message) => (
             <div
@@ -148,7 +148,7 @@ const ChatInterface: React.FC = () => {
               }`}
             >
               <div
-                className={`max-w-[70%] p-3 rounded-lg border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] whitespace-pre-wrap ${
+                className={`max-w-[70%] p-3 border-2 border-black shadow-neubrutalism ${
                   message.sender === 'user'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-secondary text-secondary-foreground'
@@ -169,7 +169,7 @@ const ChatInterface: React.FC = () => {
               placeholder="Ask Chef Veganista about vegan recipes..."
               className="flex-1 border-2 border-black focus:ring-2 focus:ring-accent"
             />
-            <Button onClick={handleSendMessage} className="bg-accent hover:bg-accent-foreground text-accent-foreground hover:text-accent border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
+            <Button onClick={handleSendMessage} className="bg-accent text-accent-foreground border-2 border-black shadow-neubrutalism">
               <Send className="w-4 h-4" />
             </Button>
           </div>

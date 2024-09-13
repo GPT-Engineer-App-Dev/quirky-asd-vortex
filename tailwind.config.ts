@@ -10,47 +10,47 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#FFF700', // Bright yellow
-        foreground: '#FF00FF', // Hot pink
+        background: '#FFFFFF', // White
+        foreground: '#000000', // Black
         card: {
-          DEFAULT: '#00FFFF', // Cyan
-          foreground: '#FF00FF', // Hot pink
+          DEFAULT: '#FFFFFF', // White
+          foreground: '#000000', // Black
         },
         popover: {
-          DEFAULT: '#00FFFF', // Cyan
-          foreground: '#FF00FF', // Hot pink
+          DEFAULT: '#FFFFFF', // White
+          foreground: '#000000', // Black
         },
         primary: {
-          DEFAULT: '#FF6600', // Neon orange
-          foreground: '#FFFFFF', // White
-        },
-        secondary: {
-          DEFAULT: '#00FF00', // Lime green
-          foreground: '#000000', // Black
-        },
-        muted: {
-          DEFAULT: '#C0C0C0', // Silver
-          foreground: '#000000', // Black
-        },
-        accent: {
-          DEFAULT: '#FF1493', // Deep pink
-          foreground: '#FFFFFF', // White
-        },
-        destructive: {
           DEFAULT: '#FF0000', // Red
           foreground: '#FFFFFF', // White
         },
+        secondary: {
+          DEFAULT: '#0000FF', // Blue
+          foreground: '#FFFFFF', // White
+        },
+        muted: {
+          DEFAULT: '#CCCCCC', // Light Gray
+          foreground: '#000000', // Black
+        },
+        accent: {
+          DEFAULT: '#FFFF00', // Yellow
+          foreground: '#000000', // Black
+        },
+        destructive: {
+          DEFAULT: '#FF00FF', // Magenta
+          foreground: '#FFFFFF', // White
+        },
         border: '#000000', // Black
-        input: '#C0C0C0', // Silver
-        ring: '#FF00FF', // Hot pink
+        input: '#FFFFFF', // White
+        ring: '#000000', // Black
       },
       borderRadius: {
-        lg: '0.5rem',
-        md: '0.375rem',
-        sm: '0.25rem',
+        lg: '0',
+        md: '0',
+        sm: '0',
       },
-      backgroundImage: {
-        'retro-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+      boxShadow: {
+        'neubrutalism': '5px 5px 0 0 #000000',
       },
     },
   },
